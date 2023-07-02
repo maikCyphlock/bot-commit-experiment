@@ -25,25 +25,10 @@ async function configurarUsuario() {
             return;
           }
           console.log(`Correo electrónico configurado con éxito: ${stdout}`);
-          cloneRepo();
         }
       );
     }
   );
-}
-
-function cloneRepo() {
-  rl.question("Ingresa la URL del repositorio que deseas clonar: ", (url) => {
-    exec(`git clone ${url}`, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error al clonar el repositorio: ${error}`);
-        return;
-      }
-      console.log(`Repositorio clonado con éxito: ${stdout}`);
-      rl.close();
-      agregarRemote();
-    });
-  });
 }
 
 async function agregarRemote(url) {
@@ -54,7 +39,6 @@ async function agregarRemote(url) {
     }
     console.log(`Control remoto agregado con éxito: ${stdout}`);
     rl.close();
-    hacerCommit();
   });
 }
 
@@ -76,17 +60,6 @@ function hacerCommit() {
         copiarCommit();
       });
     });
-  });
-}
-
-function copiarCommit() {
-  exec("git push -u origin main", (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error al copiar el commit: ${error}`);
-      return;
-    }
-    console.log(`Commit copiado al control remoto con éxito: ${stdout}`);
-    rl.close();
   });
 }
 
