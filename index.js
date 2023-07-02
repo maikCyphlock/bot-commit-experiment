@@ -63,8 +63,8 @@ function hacerCommit() {
 }
 
 async function ejecutar() {
-  await configurarUsuario();
-  await agregarRemote("https://github.com/maikCyphlock/bot-commit-experiment");
+  //   await configurarUsuario();
+  //   await agregarRemote("https://github.com/maikCyphlock/bot-commit-experiment");
   hacerCommit();
 }
 
