@@ -42,7 +42,7 @@ async function agregarRemote(url) {
   });
 }
 
-function hacerCommit() {
+async function hacerCommit() {
   exec("git add .", (error, stdout, stderr) => {
     if (error) {
       console.error(`Error al agregar los cambios: ${error}`);
@@ -62,10 +62,20 @@ function hacerCommit() {
   });
 }
 
+async function pushCommit() {
+  exec("git push --set-upstream origin master", (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error al hacer el commit: ${error}`);
+      return;
+    }
+    console.log(`Commit realizado con éxito: ${stdout}`);
+  });
+}
 async function ejecutar() {
   //   await configurarUsuario();
   //   await agregarRemote("https://github.com/maikCyphlock/bot-commit-experiment");
-  hacerCommit();
+  await hacerCommit();
+  await pushCommit();
 }
 
 ejecutar();
