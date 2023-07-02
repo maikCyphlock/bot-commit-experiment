@@ -57,7 +57,6 @@ function hacerCommit() {
         }
         console.log(`Commit realizado con éxito: ${stdout}`);
         rl.close();
-        copiarCommit();
       });
     });
   });
