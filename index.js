@@ -43,21 +43,21 @@ async function agregarRemote(url) {
 }
 
 function hacerCommit() {
+  exec("git add .", (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error al agregar los cambios: ${error}`);
+      return;
+    }
+    console.log(`Cambios agregados al commit: ${stdout}`);
+  });
   rl.question("Ingresa un mensaje para el commit: ", (mensaje) => {
-    exec("git add .", (error, stdout, stderr) => {
+    exec(`git commit -m "${mensaje}"`, (error, stdout, stderr) => {
       if (error) {
-        console.error(`Error al agregar los cambios: ${error}`);
+        console.error(`Error al hacer el commit: ${error}`);
         return;
       }
-      console.log(`Cambios agregados al commit: ${stdout}`);
-      exec(`git commit -m "${mensaje}"`, (error, stdout, stderr) => {
-        if (error) {
-          console.error(`Error al hacer el commit: ${error}`);
-          return;
-        }
-        console.log(`Commit realizado con éxito: ${stdout}`);
-        rl.close();
-      });
+      console.log(`Commit realizado con éxito: ${stdout}`);
+      rl.close();
     });
   });
 }
